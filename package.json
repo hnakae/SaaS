@@ -4,11 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma":{
+    "seed": "ts-node --compiler-options {\"module\":\"commonjs\"} ./prisma/seed.ts"
+  },
   "dependencies": {
+    "@prisma/client": "^4.14.0",
     "@types/node": "20.1.4",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -21,5 +25,9 @@
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "prisma": "^4.14.0",
+    "ts-node": "^10.9.1"
   }
 }
