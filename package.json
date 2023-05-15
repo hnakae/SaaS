@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "prisma":{
+  "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"commonjs\"} ./prisma/seed.ts"
   },
   "dependencies": {
@@ -17,9 +17,11 @@
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "bcrypt": "^5.1.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "next": "13.4.2",
+    "next-auth": "^4.22.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -27,6 +29,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "prisma": "^4.14.0",
     "ts-node": "^10.9.1"
   }
