@@ -111,3 +111,5 @@ pnpm install tailwindcss-animate class-variance-authority clsx tailwind-merge lu
 ## Home - Landing Page
 
 ## Dashboard - SaaS
+
+## deploy on vercel
