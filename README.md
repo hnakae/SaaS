@@ -91,3 +91,13 @@ pnpm add -D @types/bcrypt
 ### update session JWT with new data
 
 ### protected routes with middleware
+
+## Register page
+
+### install shadcn/ui dependencies
+
+```bash
+pnpm install tailwindcss-animate class-variance-authority clsx tailwind-merge lucide-react
+```
+
+## Login page
