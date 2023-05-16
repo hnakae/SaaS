@@ -1,6 +1,7 @@
 export { default } from "next-auth/middleware";
 
-// secure certain pages. dashboard, and app directory
 export const config = {
-  matcher: ["/dashboard", "/app/:path*", "/other/:path*", "/help/:path*"],
+  //anything that does NOT start with /register or /api or /login
+  //these are white listed url structures
+  matcher: ["/((?!register|api|login).*)"],
 };

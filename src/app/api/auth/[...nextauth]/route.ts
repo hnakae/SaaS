@@ -4,6 +4,9 @@ import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/login",
+  },
   session: {
     strategy: "jwt",
   },
@@ -11,7 +14,6 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Sign in",
       credentials: {
-        //we use email because email in db is set to unique
         email: {
           label: "Email",
           type: "email",
@@ -20,9 +22,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        //mock credentials
-        // const user = { id: "1", name: "Hiro", email: "test@test.io" };
-        // return user;
         if (!credentials?.email || !credentials.password) {
           return null;
         }
@@ -33,12 +32,10 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        // bail out early to avoid nested ifs
         if (!user) {
           return null;
-        } //we have a user, now we need to check the password
+        }
 
-        // because bcrypt salts things, we're going to get a different hash each time so we need to use compare to check if the passwords are the same.
         const isPasswordValid = await compare(
           credentials.password,
           user.password
