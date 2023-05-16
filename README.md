@@ -101,3 +101,13 @@ pnpm install tailwindcss-animate class-variance-authority clsx tailwind-merge lu
 ```
 
 ## Login page
+
+# What's next?
+
+## add navbar to home page
+
+### Home - Dashboard - SignIn/SignOut - Register
+
+## Home - Landing Page
+
+## Dashboard - SaaS

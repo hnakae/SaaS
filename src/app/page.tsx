@@ -13,14 +13,14 @@ export default async function Home() {
     },
   });
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-slate-100">
-      <LoginButton />
-      <LogoutButton />
-      <div>Hello, {user?.name}</div>
-      <h2>Server Call</h2>
+    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-100">
+      {session !== null ? <LogoutButton /> : <LoginButton />}
+
+      <div className="mt-6">Hello, {user?.name}</div>
+      {/* <h2>Server Call</h2>
       <pre>{JSON.stringify(session)}</pre>
       <h2>Client Call</h2>
-      <User />
+      <User /> */}
     </main>
   );
 }
