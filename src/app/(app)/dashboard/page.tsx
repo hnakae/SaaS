@@ -1,3 +1,5 @@
+import Layout from "@/components/layout";
+
 export default async function Dashboard() {
-  return <div className="min-h-screen bg-slate-400">Super Secret page</div>;
+  return <Layout className="outline px-36">Dashboard</Layout>;
 }

@@ -18,17 +18,19 @@ const Navbar = ({ session }) => {
     <header className=" z-10 bg-white w-full h-auto xs:px-4 xs:py-5 sm:px-8 sm:py-6 md:px-12 md:py-7 lg:px-36 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light  ">
       <div className="w-full flex justify-between items-center">
         <Logo />
-        <nav>
+        <nav className="space-x-4">
           <Link href="/dashboard">Dashboard</Link>
+          <Link href="/dashboard">Blog</Link>
+          <Link href="/dashboard">Search</Link>
+          {session !== null ? <LogoutButton /> : <LoginButton />}
           <Link
             href="/"
-            className="mx-4 border text-dark bg-light border-dark p-4 hover:text-white hover:bg-black"
+            className=" border text-dark bg-light border-dark p-4 hover:text-white hover:bg-black"
           >
             Contact us
           </Link>
-          {session !== null ? <LogoutButton /> : <LoginButton />}
           <button
-            className="flex-col justify-center items-center ml-4 z-20 "
+            className="flex-col justify-center items-center  z-20 "
             onClick={handleClick}
           >
             <span
@@ -51,9 +53,15 @@ const Navbar = ({ session }) => {
       </div>
       {isOpen ? (
         <div className="min-w-[70vw] z-30 flex justify-around items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-dark/90 dark:bg-light/75 rounded-lg backdrop-blur-md py-32">
-          <nav className="flex items-center flex-col justify-center">
-            <Link href="/" className="">
+          <nav className="flex items-center flex-col justify-center space-y-4">
+            <Link href="/" className="text-light">
               contact
+            </Link>
+            <Link href="/" className="text-light">
+              blog
+            </Link>
+            <Link href="/" className="text-light">
+              search
             </Link>
           </nav>
 
@@ -70,14 +78,14 @@ const Navbar = ({ session }) => {
               )}
             </button>
             <div className="text-light/50 dark:text-dark/50">Follow us</div>
-            <Link href="/" className="">
-              contact
+            <Link href="/" className="text-light">
+              Linkedin
             </Link>
             <div className="text-light/50 dark:text-dark/50 mt-8">
               Get in touch
             </div>
-            <Link href="/" className="">
-              contact
+            <Link href="/" className="text-light">
+              info@my.agency
             </Link>
             <div></div>
           </nav>

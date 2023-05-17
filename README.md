@@ -113,3 +113,19 @@ pnpm install tailwindcss-animate class-variance-authority clsx tailwind-merge lu
 ## Dashboard - SaaS
 
 ## deploy on vercel
+
+# What's next?
+
+## how the footer is using layout
+
+# feature ideas
+
+## blog page for CRUD
+
+## paginated table for fetched data
+
+## search component
+
+## contact form using zod
+
+## profile page!
