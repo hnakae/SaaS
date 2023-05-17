@@ -1,11 +1,14 @@
 // import { prisma } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "./api/auth/[...nextauth]/route";
 // import { User } from "./user";
-import { LoginButton, LogoutButton } from "./auth";
+import Layout from "../components/layout";
+// import { LoginButton, LogoutButton } from "./auth";
+import Hero from "../components/sections/hero";
+// import { NavigationMenu } from "@radix-ui/react-navigation-menu";
 
-export default async function Home() {
-  const session = await getServerSession(authOptions);
+export default function Home() {
+  // const session = await getServerSession(authOptions);
 
   // const user = await prisma.user.findFirst({
   //   where: {
@@ -13,14 +16,15 @@ export default async function Home() {
   //   },
   // });
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-100">
-      {session !== null ? <LogoutButton /> : <LoginButton />}
-
-      {/* <div className="mt-6">Hello, {user?.name}</div> */}
-      {/* <h2>Server Call</h2>
-      <pre>{JSON.stringify(session)}</pre>
-      <h2>Client Call</h2>
-      <User /> */}
+    <main className="flex items-center justify-center ">
+      <Layout>
+        <Hero />
+        {/* <Projects />
+        <Skills />
+        <About />
+        <Tasks />
+        <Contact /> */}
+      </Layout>
     </main>
   );
 }
