@@ -15,11 +15,11 @@ const Navbar = ({ session }) => {
     setIsOpen(!isOpen);
   };
   return (
-    <header className=" z-10 bg-white w-full h-auto xs:px-4 xs:py-5 sm:px-8 sm:py-6 md:px-12 md:py-7 lg:px-36 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light absolute ">
+    <header className=" z-10 bg-white w-full h-auto xs:px-4 xs:py-5 sm:px-8 sm:py-6 md:px-12 md:py-7 lg:px-36 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light  ">
       <div className="w-full flex justify-between items-center">
         <Logo />
         <nav>
-          <Link href="/">About</Link>
+          <Link href="/dashboard">Dashboard</Link>
           <Link
             href="/"
             className="mx-4 border text-dark bg-light border-dark p-4 hover:text-white hover:bg-black"
