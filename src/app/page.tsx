@@ -2,7 +2,6 @@
 // import { getServerSession } from "next-auth";
 // import { authOptions } from "./api/auth/[...nextauth]/route";
 // import { User } from "./user";
-import Layout from "../components/layout";
 // import { LoginButton, LogoutButton } from "./auth";
 import Hero from "../components/sections/hero";
 // import { NavigationMenu } from "@radix-ui/react-navigation-menu";
@@ -16,15 +15,15 @@ export default function Home() {
   //   },
   // });
   return (
-    <main className="flex items-center justify-center min-h-screen">
-      <Layout>
+    <main className="flex items-center justify-center min-h-screen pt-[64px]">
+      <div className="w-full">
         <Hero />
         {/* <Projects />
         <Skills />
         <About />
         <Tasks />
         <Contact /> */}
-      </Layout>
+      </div>
     </main>
   );
 }

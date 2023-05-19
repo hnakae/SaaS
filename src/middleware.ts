@@ -4,5 +4,5 @@ export const config = {
   //anything that does NOT start with /register or /api or /login
   //these are white listed url structures
   // matcher: ["/((?!register|api|login).*)"],
-  matcher: ["/dashboard"],
+  matcher: ["/dashboard", "/profile"],
 };

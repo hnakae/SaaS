@@ -14,7 +14,7 @@ module.exports = {
         primary: "#B63E96", // 240,86,199
         primaryDark: "#58E6D9", // 80,230,217
         coffee: "#f0e7db",
-        opaque: "#ffffff90",
+        opaque: "#ffffff40",
         brand: "#1582CC",
         brandDark: "#00d5ff",
         brandPurple: "#ebdbff",
@@ -22,6 +22,7 @@ module.exports = {
         brandGray: "#f5f7ff",
         brandBlue: "#F9FEFF",
         brandBlue2: "#dbeefd",
+        purp: "#D3D6E9",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
