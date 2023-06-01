@@ -15,13 +15,13 @@ const Navbar = ({ session }) => {
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
-  useEffect(() => {
-    if (session) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  }, [session, loggedIn]);
+  // useEffect(() => {
+  //   if (session) {
+  //     setLoggedIn(true);
+  //   } else {
+  //     setLoggedIn(false);
+  //   }
+  // }, [session, loggedIn]);
   return (
     <header className=" z-10 h-[64px]  bg-opaque backdrop-blur-md w-full sm:py-6 md:px-12 md:py-7 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light  fixed ">
       <div className="w-full flex justify-between items-center">

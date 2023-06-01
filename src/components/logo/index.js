@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const Logo = () => {
   return (
     <div className="flex items-center justify-center ">
-      <Link href="/">HiroNakae</Link>
+      <Link href="/">GoGuides</Link>
     </div>
     // <div className="flex items-center justify-center ">
     //   <MotionLink
