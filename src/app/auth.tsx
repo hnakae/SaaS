@@ -14,11 +14,11 @@ export const LoginButton = () => {
   );
 };
 
-export const LogoutButton = () => {
+export const LogoutButton = ({ className }: any) => {
   return (
     <button
       // className="bg-white  px-4 py-2 rounded-md shadow-md"
-      className=""
+      className={className}
       onClick={() => signOut()}
     >
       Sign out

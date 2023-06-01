@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../logo";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -7,21 +7,41 @@ useRouter;
 import useThemeSwitcher from "../hooks/useThemeSwitcher";
 import { LoginButton, LogoutButton } from "../../app/auth";
 import { SunIcon, MoonIcon } from "../icons";
-
+import { Switch } from "../ui/switch";
 const Navbar = ({ session }) => {
   const [mode, setMode] = useThemeSwitcher();
   const [isOpen, setIsOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+  useEffect(() => {
+    if (session) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [session, loggedIn]);
   return (
-    <header className=" z-10 h-[64px]  bg-opaque backdrop-blur-md w-full  xs:px-4 xs:py-5 sm:px-8 sm:py-6 md:px-12 md:py-7 lg:px-36 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light  fixed ">
+    <header className=" z-10 h-[64px]  bg-opaque backdrop-blur-md w-full sm:py-6 md:px-12 md:py-7 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light  fixed ">
       <div className="w-full flex justify-between items-center">
         <Logo />
         <nav className="space-x-6">
-          <Link href="/dashboard">Profile</Link>
+          {/* <Link href="/dashboard">Profile</Link> */}
+
+          <Link href="/">Home</Link>
           <Link href="/dashboard">Dashboard</Link>
-          {session !== null ? <LogoutButton /> : <LoginButton />}
+          <Link href="/guides">Guides</Link>
+          <Link href="/courses">Courses</Link>
+          <Link href="/tierlist">Tier List</Link>
+          <Link href="/getplus" className="underline rounded-sm p-2">
+            GET PLUS
+          </Link>
+
+          {/* <Switch
+            className="z-30"
+            onClick={() => setMode(mode === "light" ? "dark" : "light")}
+          /> */}
 
           <button
             className="flex-col justify-center items-center  z-20 "
@@ -49,13 +69,19 @@ const Navbar = ({ session }) => {
         <div className="min-w-[70vw] z-30 flex justify-around items-center fixed top-72 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-dark/90 dark:bg-light/75 rounded-lg backdrop-blur-md py-32">
           <nav className="flex items-center flex-col justify-center space-y-4">
             <Link href="/" className="text-light">
-              contact
+              Home
             </Link>
-            <Link href="/" className="text-light">
-              blog
+            <Link href="/dashboard" className="text-light">
+              Dashboard
             </Link>
-            <Link href="/" className="text-light">
-              search
+            <Link href="/guides" className="text-light">
+              Guides
+            </Link>
+            <Link href="/courses" className="text-light">
+              Courses
+            </Link>
+            <Link href="/tierlist" className="text-light">
+              Tier List
             </Link>
           </nav>
 
