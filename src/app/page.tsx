@@ -18,11 +18,6 @@ export default async function Home() {
     <main className="flex items-center justify-center min-h-screen pt-[64px]">
       <div className="w-full">
         <Hero session={session} />
-        {/* <Projects />
-        <Skills />
-        <About />
-        <Tasks />
-        <Contact /> */}
       </div>
     </main>
   );

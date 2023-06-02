@@ -23,7 +23,7 @@ const Navbar = ({ session }) => {
   //   }
   // }, [session, loggedIn]);
   return (
-    <header className=" z-10 h-[64px]  bg-opaque backdrop-blur-md w-full sm:py-6 md:px-12 md:py-7 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light  fixed ">
+    <header className=" z-10 h-[64px]  bg-opaque backdrop-blur-md w-full px-12 md:py-7 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light  fixed ">
       <div className="w-full flex justify-between items-center">
         <Logo />
         <nav className="space-x-6">
@@ -33,9 +33,8 @@ const Navbar = ({ session }) => {
           <Link href="/dashboard">Dashboard</Link>
           <Link href="/guides">Guides</Link>
           <Link href="/courses">Courses</Link>
-          <Link href="/tierlist">Tier List</Link>
-          <Link href="/getplus" className="underline rounded-sm p-2">
-            GET PLUS
+          <Link href="/getplus" className=" rounded-sm p-2">
+            Premium
           </Link>
 
           {/* <Switch

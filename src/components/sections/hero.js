@@ -22,21 +22,19 @@ const Hero = ({ session }) => {
         <div>your go journey</div>
       </div>
       <div className="px-12 font-normal mb-10 flex flex-col opacity-70 text-lg tracking-tight">
+        <div>Players of all ranks optimize learning to become stronger.</div>
         <div>
-          Players of all levels rely on GoGuides as they progress towards their
-          next rank.
-        </div>
-        <div>
-          Create a new account and try online go education as it should be.
+          Create a new account to experience online go education as it should
+          be.
         </div>
       </div>
       <div className="flex px-12 space-x-4 z-20">
-        <input
+        {/* <input
           placeholder="Enter your email"
           type="text"
           className="py-2 px-4 rounded-md placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 w-72"
-        />
-        <div className=" bg-blue-500 hover:bg-blue-600 cursor-pointer px-4 py-2 rounded-3xl text-white ">
+        /> */}
+        <div className=" bg-blue-500 hover:bg-blue-600 cursor-pointer px-12 py-2 rounded-3xl text-white ">
           {!!session ? <LogoutButton /> : <LoginButton />}
         </div>
       </div>

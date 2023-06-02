@@ -11,8 +11,8 @@ import {
 const Footer = () => {
   return (
     <>
-      <footer className=" w-full px-8 font-normal text-sm dark:text-light dark:border-light sm:text-base  ">
-        <div className="h-[455px] text-dark">
+      <footer className=" w-full px-12 font-normal text-sm dark:text-light dark:border-light sm:text-base  ">
+        <div className="h-[455px] text-dark w-full ">
           <div className="flex justify-around p-12">
             <div className="flex flex-col gap-4">
               <div className="font-bold text-2xl">info@my.agency</div>

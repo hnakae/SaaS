@@ -3,7 +3,7 @@ import pic from "../../../../public/go-player.png";
 
 export default async function Getplus() {
   return (
-    <div className="min-h-screen pt-[64px] pb-24 text-white bg-black">
+    <div className="min-h-screen pt-[64px] pb-24 ">
       <div className="text-4xl text-center my-6">GOGUIDES</div>
       <div className="flex justify-center items-center">
         <div className="w-[80vw] h-auto rounded-xl flex">
