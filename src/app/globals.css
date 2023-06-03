@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  //background: white;
+  @apply bg-gradient-to-br from-cyan-500 to-blue-500 rounded-sm cursor-pointer outline;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.wrapper::before {
+  content: "";
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/proverbs.png);
+  background-repeat: no-repeat;
+  //background-size: cover;
+  //background-size: contain;
+  background-size: contain;
+  background-position: right;
+  transform: rotate(-10deg);
+  z-index: -1;
+}

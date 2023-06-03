@@ -5,23 +5,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 useRouter;
 import useThemeSwitcher from "../hooks/useThemeSwitcher";
-import { LoginButton, LogoutButton } from "../../app/auth";
+// import { LoginButton, LogoutButton } from "../../app/auth";
 import { SunIcon, MoonIcon } from "../icons";
-import { Switch } from "../ui/switch";
+// import { Switch } from "../ui/switch";
 const Navbar = ({ session }) => {
   const [mode, setMode] = useThemeSwitcher();
   const [isOpen, setIsOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(false);
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
-  // useEffect(() => {
-  //   if (session) {
-  //     setLoggedIn(true);
-  //   } else {
-  //     setLoggedIn(false);
-  //   }
-  // }, [session, loggedIn]);
+
   return (
     <header className=" z-10 h-[64px]  bg-opaque backdrop-blur-md w-full px-12 md:py-7 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light  fixed ">
       <div className="w-full flex justify-between items-center">
@@ -29,9 +23,9 @@ const Navbar = ({ session }) => {
         <nav className="space-x-6">
           {/* <Link href="/dashboard">Profile</Link> */}
 
-          <Link href="/">Home</Link>
+          {/* <Link href="/">Home</Link> */}
           <Link href="/dashboard">Dashboard</Link>
-          <Link href="/guides">Guides</Link>
+          {/* <Link href="/guides">Guides</Link> */}
           <Link href="/courses">Courses</Link>
           <Link href="/getplus" className=" rounded-sm p-2">
             Premium

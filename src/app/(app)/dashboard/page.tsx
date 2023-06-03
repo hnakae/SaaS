@@ -1,11 +1,15 @@
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import Card from "../../../components/ui/card";
 import { prisma } from "@/lib/prisma";
-import profile from "../../../../public/analytics.png";
-import Image from "next/image";
+// import profile from "../../../../public/analytics.png";
+// import Image from "next/image";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 export default async function Dashboard() {
-  const user = await prisma.user.findMany({});
+  const session = await getServerSession(authOptions);
+
+  const courses = await prisma.course.findMany({});
   // console.log(user);
   return (
     <div className="outline px-36 min-h-screen pt-[64px] space-y-4">
@@ -14,7 +18,8 @@ export default async function Dashboard() {
       {/* <Image src={profile} alt="image" width="500" height="500" /> */}
 
       <div className="grid grid-cols-1">
-        <Card data={user[0].email} />
+        {/* <Card data={user[0].email} /> */}
+        <Card data={session?.user?.email} />
       </div>
       <div className="grid grid-cols-4 gap-4">
         {/* <Card data={user} /> */}
@@ -27,6 +32,11 @@ export default async function Dashboard() {
         <Card data="Kifu Library" />
         <Card data="Game Reviews" />
         <Card data="AI Suggestions" />
+      </div>
+      <div className="grid grid-cols-1 gap-4">
+        {courses.map((course) => (
+          <Card key={course.id} data={course.title} />
+        ))}
       </div>
     </div>
   );

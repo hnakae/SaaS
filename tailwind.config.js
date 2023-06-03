@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      transform: {
+        // "rotate-45": "rotate(45deg)",
+      },
       colors: {
         dark: "#1b1b1b",
         light: "#fff",
@@ -29,6 +32,7 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "div-background": "url('/proverbs.png')",
       },
     },
   },
