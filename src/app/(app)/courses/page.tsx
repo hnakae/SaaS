@@ -29,7 +29,7 @@ export default async function Courses() {
   // };
   const courses = await prisma.course.findMany({});
   return (
-    <div className="min-h-screen pt-[64px] space-y-6">
+    <div className="min-h-screen py-[64px] space-y-6">
       <div className="pt-6 text-4xl text-center">MASTER COURSES</div>
       {courses.map((course: any) => (
         <Course
