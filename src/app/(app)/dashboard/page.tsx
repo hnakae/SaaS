@@ -31,7 +31,7 @@ export default async function Dashboard() {
         </div>
       </div>
       <div className="text-center font-bold text-4xl py-6">My Courses</div>
-      {courses.map((course: any) => (
+      {courses?.map((course: any) => (
         <Course
           key={course.id}
           title={course.title}

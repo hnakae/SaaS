@@ -11,7 +11,7 @@ export default async function Courses() {
   return (
     <div className="min-h-screen py-[64px] space-y-6">
       <div className="pt-6 text-4xl text-center">MASTER COURSES</div>
-      {courses.map((course: CourseProps) => (
+      {courses?.map((course: CourseProps) => (
         <Course
           key={course.id}
           title={course.title}
