@@ -35,7 +35,7 @@ export default async function Dashboard() {
       </div>
       <div className="grid grid-cols-1 gap-4">
         <div className="text-center font-bold text-4xl py-6">My Courses</div>
-        {courses.map((course) => (
+        {courses.map((course: any) => (
           <Card key={course.id} data={course.title} />
         ))}
       </div>
