@@ -37,7 +37,7 @@ export const Form = () => {
   return (
     <form onSubmit={onSubmit} className="space-y-12 w-full sm:w-[400px]">
       <div className="grid w-full items-center gap-1.5">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">Email: test@test.io</Label>
         <Input
           className="w-full"
           required
@@ -45,10 +45,11 @@ export const Form = () => {
           onChange={(e) => setEmail(e.target.value)}
           id="email"
           type="email"
+          placeholder="test@test.io"
         />
       </div>
       <div className="grid w-full items-center gap-1.5">
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">Password: test</Label>
         <Input
           className="w-full"
           required
@@ -56,6 +57,8 @@ export const Form = () => {
           onChange={(e) => setPassword(e.target.value)}
           id="password"
           type="password"
+          autoComplete="on"
+          placeholder="test"
         />
       </div>
       {error && <Alert>{error}</Alert>}

@@ -25,7 +25,7 @@ export default async function Dashboard() {
 
       <div className=" flex flex-col justify-center items-center pt-6 space-y-4">
         {/* <Card data={session?.user?.email} /> */}
-        <Image src="/hikaru.jpg" alt="" width={850} height={100} />
+        <Image src="/hikaru.jpg" alt="" width={850} height={100} priority />
         <div className="flex justify-center items-center w-[80%] space-x-4 flex-grow-0">
           <Card data="Rank: [1d]" />
           <Card data="Goal: [2d]" />
