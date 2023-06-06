@@ -29,8 +29,8 @@ export default async function Dashboard() {
         <Card data="My Courses" />
         <Card data="challenges: checkmarked calendar" />
         <Card data="Tsumego Categories" />
-        <Card data="Kifu Library" />
         <Card data="Game Reviews" />
+        <Card data="Kifu Library" />
         <Card data="AI Suggestions" />
       </div>
       <div className="grid grid-cols-1 gap-4">
