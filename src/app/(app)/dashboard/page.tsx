@@ -8,7 +8,12 @@ import { prisma } from "@/lib/prisma";
 
 import Course from "@/components/ui/course/course";
 import Image from "next/image";
-
+interface CourseProps {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+}
 export default async function Dashboard() {
   // const session = await getServerSession(authOptions);
 
@@ -31,7 +36,7 @@ export default async function Dashboard() {
         </div>
       </div>
       <div className="text-center font-bold text-4xl py-6">My Courses</div>
-      {courses?.map((course: any) => (
+      {courses?.map((course: CourseProps) => (
         <Course
           key={course.id}
           title={course.title}
