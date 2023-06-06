@@ -17,35 +17,34 @@ async function main() {
   // Seed the course table
   const courseData = [
     {
-      title: "proverbs",
-      description: "fundamental concepts",
-      content: "strength & weakness of groups",
-    },
-    // Add more course data here
-    {
       title: "basic instinct",
-      description: "description2",
-      content: "content2",
-    },
-    {
-      title: "joseki",
-      description: "description3",
-      content: "content3",
+      description: "local shapes",
+      content: "Must Know",
+      image: "shape.png",
     },
     {
       title: "alpha go",
-      description: "description3",
-      content: "content3",
+      description: "Systematic Opening",
+      content: "Alpha Go Zero Style",
+      image: "alphago.png",
     },
     {
-      title: "strategies",
-      description: "description3",
-      content: "content3",
+      title: "proverbs",
+      description: "fundamental concepts",
+      content: "strength & weakness of groups",
+      image: "proverbs.png",
     },
     {
-      title: "tenuki",
-      description: "description3",
-      content: "content3",
+      title: "joseki",
+      description: "Joseki Series",
+      content: "will be updated frequently",
+      image: "joseki.png",
+    },
+    {
+      title: "strategy",
+      description: "Shin Jinseo",
+      content: "Let's study how Shin Jinseo plays",
+      image: "strategy.png",
     },
   ];
 

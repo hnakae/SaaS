@@ -6,7 +6,7 @@ export default async function Getplus() {
     <div className="min-h-screen pt-[64px] pb-24 ">
       <div className="text-4xl text-center my-6">GOGUIDES</div>
       <div className="flex justify-center items-center">
-        <div className="w-[80vw] h-auto  flex overflow-hidden rounded-lg">
+        <div className="w-[80vw] h-[754px]  flex overflow-hidden rounded-lg">
           <div className="w-[45%] overflow-hidden">
             <Image src={pic} alt="go player" className="scale-125" />
           </div>
