@@ -6,13 +6,15 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 
+import Course from "@/components/ui/course/course";
+
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
 
   const courses = await prisma.course.findMany({});
   // console.log(user);
   return (
-    <div className="outline px-36 min-h-screen pt-[64px] space-y-4">
+    <div className="outline px-36 min-h-screen pt-[64px] space-y-6">
       <h1 className="text-4xl pt-6">My Dashboard</h1>
       <h2 className="text-3xl">Progress Tracker</h2>
       {/* <Image src={profile} alt="image" width="500" height="500" /> */}
@@ -36,7 +38,12 @@ export default async function Dashboard() {
       <div className="grid grid-cols-1 gap-4">
         <div className="text-center font-bold text-4xl py-6">My Courses</div>
         {courses.map((course: any) => (
-          <Card key={course.id} data={course.title} />
+          <Course
+            key={course.id}
+            title={course.title}
+            description={course.description}
+            image={course.image}
+          />
         ))}
       </div>
     </div>
