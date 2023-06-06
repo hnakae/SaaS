@@ -24,13 +24,14 @@ const Navbar = ({ session }) => {
           {/* <Link href="/dashboard">Profile</Link> */}
 
           {/* <Link href="/">Home</Link> */}
-          <Link href="/dashboard">Dashboard</Link>
-          {/* <Link href="/guides">Guides</Link> */}
-          <Link href="/courses">Courses</Link>
-          <Link href="/getplus" className=" rounded-sm p-2">
-            Premium
-          </Link>
-
+          <div className="hidden sm:inline-block space-x-6">
+            <Link href="/dashboard">Dashboard</Link>
+            {/* <Link href="/guides">Guides</Link> */}
+            <Link href="/courses">Courses</Link>
+            <Link href="/getplus" className=" rounded-sm p-2">
+              Premium
+            </Link>
+          </div>
           {/* <Switch
             className="z-30"
             onClick={() => setMode(mode === "light" ? "dark" : "light")}
