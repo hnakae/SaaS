@@ -8,7 +8,7 @@ import useThemeSwitcher from "../hooks/useThemeSwitcher";
 // import { LoginButton, LogoutButton } from "../../app/auth";
 import { SunIcon, MoonIcon } from "../icons";
 // import { Switch } from "../ui/switch";
-const Navbar = ({ session }) => {
+const Navbar = () => {
   const [mode, setMode] = useThemeSwitcher();
   const [isOpen, setIsOpen] = useState(false);
   // const [loggedIn, setLoggedIn] = useState(false);

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import hero from "../../../public/hero.png";
 import React from "react";
-import { LogOut } from "lucide-react";
 import { LoginButton, LogoutButton } from "@/app/auth";
 
 const Hero = ({ session }) => {

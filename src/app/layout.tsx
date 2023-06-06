@@ -5,8 +5,8 @@ import { Providers } from "./providers";
 import Navbar from "@/components/sections/navbar";
 import Footer from "@/components/sections/footer";
 // import { Inter } from "next/font/google";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "./api/auth/[...nextauth]/route";
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -19,12 +19,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
   return (
-    <html lang="en" className="bg-purp">
+    <html lang="en" className="">
       {/* <body className={inter.className}> */}
       <body>
-        <Navbar session={session} />
+        <Navbar />
         <Providers>{children}</Providers>
         <Footer />
       </body>
