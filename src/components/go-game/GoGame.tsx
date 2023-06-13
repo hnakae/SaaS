@@ -50,7 +50,7 @@ export const GoGame = () => {
     Array.from({ length: boardSize }, () => null)
   );
   const [board, setBoard] = useState<BoardArray>(initialBoard);
-  const [player, setPlayer] = useState<string>("/black.png");
+  const [player, setPlayer] = useState<string>("/black.webp");
 
   const handleOnClick = (row: number, col: number) => {
     // if (board[row][col] || winner) {
@@ -76,16 +76,16 @@ export const GoGame = () => {
     );
     setBoard(updatedPlayerBoard);
 
-    if (player === "/black.png") {
-      setPlayer("/white.png");
+    if (player === "/black.webp") {
+      setPlayer("/white.webp");
     } else {
-      setPlayer("/black.png");
+      setPlayer("/black.webp");
     }
   };
 
   const restartGame = () => {
     setBoard(initialBoard);
-    setPlayer("/black.png");
+    setPlayer("/black.webp");
   };
 
   return (
