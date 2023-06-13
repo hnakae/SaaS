@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className=" z-10 h-[64px]  bg-opaque backdrop-blur-md w-full px-12 md:py-7 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light  fixed ">
+    <header className=" z-10 h-[64px]  bg-opaque backdrop-blur-md w-full px-12 md:py-7 lg:py-8 font-medium flex text-dark items-center justify-between dark:text-light sticky ">
       <div className="w-full flex justify-between items-center">
         <Logo />
         <nav className="space-x-6">
@@ -28,6 +28,7 @@ const Navbar = () => {
             <Link href="/dashboard">Dashboard</Link>
             {/* <Link href="/guides">Guides</Link> */}
             <Link href="/courses">Courses</Link>
+            <Link href="/board">Board</Link>
             <Link href="/getplus" className=" rounded-sm p-2">
               Premium
             </Link>

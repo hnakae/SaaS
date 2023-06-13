@@ -20,12 +20,12 @@ export default async function Dashboard() {
   const courses = await prisma.course.findMany({});
   // console.log(user);
   return (
-    <div className="  min-h-screen py-[64px] space-y-6">
+    <div className="  min-h-screen space-y-6">
       {/* <Image src={profile} alt="image" width="500" height="500" /> */}
 
       <div className=" flex flex-col justify-center items-center pt-6 space-y-4">
         {/* <Card data={session?.user?.email} /> */}
-        <Image src="/hikaru.jpg" alt="" width={850} height={100} priority />
+        {/* <Image src="/hikaru.jpg" alt="" width={850} height={100} priority /> */}
         <div className="flex justify-center items-center w-[80%] space-x-4 flex-grow-0">
           <Card data="Rank: [1d]" />
           <Card data="Goal: [2d]" />

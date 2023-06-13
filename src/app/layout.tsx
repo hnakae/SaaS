@@ -21,11 +21,13 @@ export default async function RootLayout({
 }) {
   // const session = await getServerSession(authOptions);
   return (
-    <html lang="en" className="">
+    <html lang="en">
       {/* <body className={inter.className}> */}
       <body>
         <Navbar />
-        <Providers>{children}</Providers>
+        <div className="pt-[64px] min-h-screen">
+          <Providers>{children}</Providers>
+        </div>
         <Footer />
       </body>
     </html>

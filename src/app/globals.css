@@ -31,3 +31,6 @@
   transform: rotate(-10deg);
   z-index: -1;
 }
+.game {
+  -webkit-tap-highlight-color: transparent;
+}
