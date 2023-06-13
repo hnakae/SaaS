@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Board } from "./board";
 import { SvgBoard } from "../../../public/svg/SvgBoard";
 import "./GoGame.sass";
@@ -45,6 +45,22 @@ type BoardArray = Array<Array<JSX.Element | null>>;
 // };
 
 export const GoGame = () => {
+  const blackImagePath = "";
+  const whiteImagePath = "";
+  // useEffect(() => {
+  //   const preloadImages = async () => {
+  //     const blackImage = new Image();
+  //     blackImage.src = "/black.webp";
+  //     await blackImage.decode(); // Wait for the image to be decoded and cached
+
+  //     const whiteImage = new Image();
+  //     whiteImage.src = "/white.webp";
+  //     await whiteImage.decode(); // Wait for the image to be decoded and cached
+  //   };
+
+  //   preloadImages();
+  // }, []);
+
   const boardSize = 19;
   const initialBoard = Array.from({ length: boardSize }, () =>
     Array.from({ length: boardSize }, () => null)
@@ -66,7 +82,7 @@ export const GoGame = () => {
             key={cellIndex}
             className="shadow-sm shadow-dark rounded-full w-[20px] h-[20px]"
           >
-            <Image src={player} width={20} height={20} alt="img" />
+            <Image src={player} width={20} height={20} alt="img" priority />
           </div>
         ) : (
           // </div>
