@@ -61,12 +61,15 @@ export const GoGame = () => {
     const updatedPlayerBoard = board.map((newRow, rowIndex) =>
       newRow.map((cell, cellIndex) =>
         rowIndex === row && cellIndex === col ? (
-          <div key={cellIndex} className="relative ">
-            <div className="shadow-sm shadow-dark rounded-full w-[20px] h-[20px]">
-              <Image src={player} width={20} height={20} alt="img" />
-            </div>
+          // <div className="relative ">
+          <div
+            key={cellIndex}
+            className="shadow-sm shadow-dark rounded-full w-[20px] h-[20px]"
+          >
+            <Image src={player} width={20} height={20} alt="img" />
           </div>
         ) : (
+          // </div>
           cell
         )
       )
