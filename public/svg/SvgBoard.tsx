@@ -4,8 +4,8 @@ export const SvgBoard = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="380"
-      height="380"
+      width="385"
+      height="385"
       viewBox="0 0 96 96"
     >
       <rect width="96" height="96" fill="#DCB35C" />

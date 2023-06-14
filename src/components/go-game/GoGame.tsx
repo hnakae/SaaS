@@ -45,21 +45,18 @@ type BoardArray = Array<Array<JSX.Element | null>>;
 // };
 
 export const GoGame = () => {
-  const blackImagePath = "";
-  const whiteImagePath = "";
-  // useEffect(() => {
-  //   const preloadImages = async () => {
-  //     const blackImage = new Image();
-  //     blackImage.src = "/black.webp";
-  //     await blackImage.decode(); // Wait for the image to be decoded and cached
-
-  //     const whiteImage = new Image();
-  //     whiteImage.src = "/white.webp";
-  //     await whiteImage.decode(); // Wait for the image to be decoded and cached
-  //   };
-
-  //   preloadImages();
-  // }, []);
+  // const PreloadedImage = ({ src }: any) => {
+  //   return (
+  //     <Image src={src} alt="preloaded image" width={20} height={20} priority />
+  //   );
+  // };
+  // const preloadImages = async () => {
+  //   await Promise.all([
+  //     <PreloadedImage key="image1" src="/black.webp" />,
+  //     <PreloadedImage key="image2" src="/white.webp" />,
+  //   ]);
+  // };
+  // preloadImages();
 
   const boardSize = 19;
   const initialBoard = Array.from({ length: boardSize }, () =>
@@ -106,12 +103,35 @@ export const GoGame = () => {
 
   return (
     <div className="game">
-      {/* <h1> Go Game</h1> */}
-      <div className="flex justify-center items-center relative w-[380px] h-[380px]">
-        <div className="absolute top-0 left-0 z-0 ">
+      <h1> Go Game</h1>
+
+      {/* preload */}
+      <Image
+        src="/black.webp"
+        width={20}
+        height={20}
+        alt="img"
+        priority
+        className="hidden"
+      />
+      <Image
+        src="/white.webp"
+        width={20}
+        height={20}
+        alt="img"
+        priority
+        className="hidden"
+      />
+
+      {/* container */}
+      <div className="flex justify-center items-center relative w-[380px] h-[380px] ">
+        {/* Board */}
+        <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-0 ">
           <SvgBoard />
         </div>
-        <div className="absolute top-0 left-0">
+
+        {/* Stones */}
+        <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 ">
           <Board board={board} handleClick={handleOnClick} />
         </div>
       </div>
