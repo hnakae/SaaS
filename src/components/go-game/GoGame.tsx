@@ -1,48 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Board } from "./board";
 import { SvgBoard } from "../../../public/svg/SvgBoard";
 import "./GoGame.sass";
 import Image from "next/image";
 
 type BoardArray = Array<Array<JSX.Element | null>>;
-
-// const makeComputerMove = (board: BoardArray): [number, number] => {
-//   const emptyCells: [number, number][] = [];
-//   board.forEach((row, rowIndex) => {
-//     row.forEach((cell, cellIndex) => {
-//       if (!cell) {
-//         emptyCells.push([rowIndex, cellIndex]);
-//       }
-//     });
-//   });
-
-//   const randomIndex = Math.floor(Math.random() * emptyCells.length);
-//   return emptyCells[randomIndex];
-// };
-
-// const checkWinner = (board: BoardArray): string | null => {
-//   const lines = [
-//     //Rows
-//     [board[0][0], board[0][1], board[0][2]],
-//     [board[1][0], board[1][1], board[1][2]],
-//     [board[2][0], board[2][1], board[2][2]],
-//     //columns
-//     [board[0][0], board[1][0], board[2][0]],
-//     [board[0][1], board[1][1], board[2][1]],
-//     [board[0][2], board[1][2], board[2][2]],
-
-//     //Diagonals
-//     [board[0][0], board[1][1], board[2][2]],
-//     [board[0][2], board[1][1], board[2][0]],
-//   ];
-//   for (const line of lines) {
-//     if (line[0] && line[0] === line[1] && line[1] === line[2]) {
-//       return line[0];
-//     }
-//   }
-//   return null;
-// };
 
 export const GoGame = () => {
   const boardSize = 19;
@@ -51,24 +14,21 @@ export const GoGame = () => {
   );
   const [board, setBoard] = useState<BoardArray>(initialBoard);
   const [player, setPlayer] = useState<string>("/black.webp");
-  const [moveHistory, setMoveHistory] = useState<Array<[number, number]>>([]);
+  const [moveHistory, setMoveHistory] = useState<
+    Array<[number, number, string]>
+  >([]);
   const [redoMoveHistory, setRedoMoveHistory] = useState<
-    Array<[number, number]>
+    Array<[number, number, string]>
   >([]);
 
   const handleOnClick = (row: number, col: number) => {
-    // if (board[row][col] || winner) {
     if (board[row][col]) {
       return;
     }
-    // Update move history
-    setMoveHistory([...moveHistory, [row, col]]);
-    // Clear redo move history when a new move is made
-    setRedoMoveHistory([]);
+
     const updatedPlayerBoard = board.map((newRow, rowIndex) =>
       newRow.map((cell, cellIndex) =>
         rowIndex === row && cellIndex === col ? (
-          // <div className="relative ">
           <div
             key={cellIndex}
             className="shadow-sm shadow-dark rounded-full w-[20px] h-[20px]"
@@ -76,59 +36,48 @@ export const GoGame = () => {
             <Image src={player} width={20} height={20} alt="img" priority />
           </div>
         ) : (
-          // </div>
           cell
         )
       )
     );
-    setBoard(updatedPlayerBoard);
+    const nextPlayer = player === "/black.webp" ? "/white.webp" : "/black.webp";
 
-    if (player === "/black.webp") {
-      setPlayer("/white.webp");
-    } else {
-      setPlayer("/black.webp");
-    }
+    setBoard(updatedPlayerBoard);
+    setMoveHistory([...moveHistory, [row, col, player]]);
+    setRedoMoveHistory([]); // Clear redo move history
+    setPlayer(nextPlayer);
   };
 
   const undoMove = () => {
-    // Check if there are any moves in the move history
     if (moveHistory.length === 0) {
       return;
     }
 
-    // Get the coordinates of the last move
     const lastMove = moveHistory[moveHistory.length - 1];
-    const [lastMoveRow, lastMoveCol] = lastMove;
+    const [lastMoveRow, lastMoveCol, lastMoveColor] = lastMove;
 
-    // Clear the last move from the board
     const updatedBoard = board.map((newRow, rowIndex) =>
       newRow.map((cell, colIndex) =>
         rowIndex === lastMoveRow && colIndex === lastMoveCol ? null : cell
       )
     );
+    const updatedRedoMoveHistory = [...redoMoveHistory, lastMove];
     setBoard(updatedBoard);
-
-    // Remove the last move from the move history
     setMoveHistory(moveHistory.slice(0, -1));
-
-    // Add the last move to the redo move history
-    setRedoMoveHistory([...redoMoveHistory, lastMove]);
+    setRedoMoveHistory(updatedRedoMoveHistory);
+    setPlayer(lastMoveColor);
   };
 
   const redoMove = () => {
-    // Check if there are any moves in the redo move history
     if (redoMoveHistory.length === 0) {
       return;
     }
+    const [nextMoveRow, nextMoveCol] =
+      redoMoveHistory[redoMoveHistory.length - 1];
 
-    // Get the coordinates of the next move to redo
-    const nextMove = redoMoveHistory[redoMoveHistory.length - 1];
-    const [nextMoveRow, nextMoveCol] = nextMove;
+    const nextMoveColor =
+      player === "/black.webp" ? "/white.webp" : "/black.webp";
 
-    // Toggle the player's color
-    const nextPlayer = player === "/black.webp" ? "/white.webp" : "/black.webp";
-
-    // Set the next move on the board
     const updatedBoard = board.map((newRow, rowIndex) =>
       newRow.map((cell, colIndex) =>
         rowIndex === nextMoveRow && colIndex === nextMoveCol ? (
@@ -136,7 +85,7 @@ export const GoGame = () => {
             key={colIndex}
             className="shadow-sm shadow-dark rounded-full w-[20px] h-[20px]"
           >
-            <Image src={nextPlayer} width={20} height={20} alt="img" priority />
+            <Image src={player} width={20} height={20} alt="img" priority />
           </div>
         ) : (
           cell
@@ -144,20 +93,16 @@ export const GoGame = () => {
       )
     );
     setBoard(updatedBoard);
-
-    // Add the next move to the move history
-    setMoveHistory([...moveHistory, nextMove]);
-
-    // Remove the next move from the redo move history
+    setMoveHistory([...moveHistory, [nextMoveRow, nextMoveCol, player]]);
     setRedoMoveHistory(redoMoveHistory.slice(0, -1));
-
-    // Update the player's color
-    setPlayer(nextPlayer);
+    setPlayer(nextMoveColor);
   };
 
   const restartGame = () => {
     setBoard(initialBoard);
     setPlayer("/black.webp");
+    setMoveHistory([]);
+    setRedoMoveHistory([]);
   };
 
   return (
