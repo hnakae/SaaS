@@ -21,24 +21,52 @@ export const GoGame = () => {
     Array<[number, number, string]>
   >([]);
 
+  const getAdjacentSides = (row: number, col: number): number => {
+    let count = 0;
+
+    // Check if the neighboring cells are within the board bounds and are empty
+    if (row > 0 && !board[row - 1][col]) {
+      count++;
+    }
+    if (row < boardSize - 1 && !board[row + 1][col]) {
+      count++;
+    }
+    if (col > 0 && !board[row][col - 1]) {
+      count++;
+    }
+    if (col < boardSize - 1 && !board[row][col + 1]) {
+      count++;
+    }
+
+    return count;
+  };
+
   const handleOnClick = (row: number, col: number) => {
     if (board[row][col]) {
       return;
     }
 
     const updatedPlayerBoard = board.map((newRow, rowIndex) =>
-      newRow.map((cell, cellIndex) =>
-        rowIndex === row && cellIndex === col ? (
-          <div
-            key={cellIndex}
-            className="shadow-sm shadow-dark rounded-full w-[20px] h-[20px]"
-          >
-            <Image src={player} width={20} height={20} alt="img" priority />
-          </div>
-        ) : (
-          cell
-        )
-      )
+      newRow.map((cell, cellIndex) => {
+        if (rowIndex === row && cellIndex === col) {
+          const adjacentSides = getAdjacentSides(row, col);
+          return (
+            <div
+              key={cellIndex}
+              className="shadow-sm shadow-dark rounded-full w-[20px] h-[20px]"
+            >
+              <div className="stone-content relative ">
+                <Image src={player} width={20} height={20} alt="img" priority />
+                <div className="adjacent-sides absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-blue-600">
+                  {adjacentSides}
+                </div>
+              </div>
+            </div>
+          );
+        } else {
+          return cell;
+        }
+      })
     );
     const nextPlayer = player === "/black.webp" ? "/white.webp" : "/black.webp";
 
