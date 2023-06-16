@@ -107,18 +107,26 @@ export const GoGame = () => {
       player === "/black.webp" ? "/white.webp" : "/black.webp";
 
     const updatedBoard = board.map((newRow, rowIndex) =>
-      newRow.map((cell, colIndex) =>
-        rowIndex === nextMoveRow && colIndex === nextMoveCol ? (
-          <div
-            key={colIndex}
-            className="shadow-sm shadow-dark rounded-full w-[20px] h-[20px]"
-          >
-            <Image src={player} width={20} height={20} alt="img" priority />
-          </div>
-        ) : (
-          cell
-        )
-      )
+      newRow.map((cell, cellIndex) => {
+        if (rowIndex === nextMoveRow && cellIndex === nextMoveCol) {
+          const adjacentSides = getAdjacentSides(nextMoveRow, nextMoveCol);
+          return (
+            <div
+              key={cellIndex}
+              className="shadow-sm shadow-dark rounded-full w-[20px] h-[20px]"
+            >
+              <div className="stone-content relative ">
+                <Image src={player} width={20} height={20} alt="img" priority />
+                <div className="adjacent-sides absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-blue-600">
+                  {adjacentSides}
+                </div>
+              </div>
+            </div>
+          );
+        } else {
+          return cell;
+        }
+      })
     );
     setBoard(updatedBoard);
     setMoveHistory([...moveHistory, [nextMoveRow, nextMoveCol, player]]);
