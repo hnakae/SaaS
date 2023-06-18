@@ -21,3 +21,21 @@ model Course {
   description String
   content     String?
 }
+
+model Game {
+  id      Int    @id @default(autoincrement())
+  name    String
+  player1 String
+  player2 String
+  result  String
+  Move    Move[]
+}
+
+model Move {
+  id          Int    @id @default(autoincrement())
+  xCoordinate Int
+  yCoordinate Int
+  color       String
+  gameId      Int
+  game        Game   @relation(fields: [gameId], references: [id])
+}

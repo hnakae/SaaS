@@ -28,6 +28,7 @@ const Navbar = () => {
             <Link href="/dashboard">Dashboard</Link>
             {/* <Link href="/guides">Guides</Link> */}
             <Link href="/courses">Courses</Link>
+            <Link href="/library">Library</Link>
             <Link href="/board">Board</Link>
             <Link href="/getplus" className=" rounded-sm p-2">
               Premium

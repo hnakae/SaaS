@@ -25,7 +25,7 @@ export default async function RootLayout({
       {/* <body className={inter.className}> */}
       <body>
         <Navbar />
-        <div className="pt-[64px] min-h-screen">
+        <div className="min-h-screen">
           <Providers>{children}</Providers>
         </div>
         <Footer />
