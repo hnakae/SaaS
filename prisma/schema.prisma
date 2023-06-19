@@ -24,7 +24,7 @@ model Course {
 
 model Game {
   id      Int    @id @default(autoincrement())
-  name    String
+  name    String @unique
   player1 String
   player2 String
   result  String

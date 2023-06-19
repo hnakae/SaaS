@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { hash } from "bcrypt";
+
 const prisma = new PrismaClient();
+
 async function main() {
   const password = await hash("test", 12);
   const user = await prisma.user.upsert({
@@ -56,7 +58,98 @@ async function main() {
     });
     console.log("Course seeded:", course);
   }
+
+  // Seed the game table
+  const gameData = [
+    {
+      name: "10kyu",
+      player1: "Alice",
+      player2: "Bob",
+      result: "Draw",
+      Move: [
+        { xCoordinate: 1, yCoordinate: 2, color: "White" },
+        { xCoordinate: 3, yCoordinate: 4, color: "Black" },
+        // Add more moves as needed
+      ],
+    },
+    {
+      name: "3kyu",
+      player1: "Alice",
+      player2: "Bob",
+      result: "Draw",
+      Move: [
+        { xCoordinate: 1, yCoordinate: 2, color: "White" },
+        { xCoordinate: 3, yCoordinate: 4, color: "Black" },
+        // Add more moves as needed
+      ],
+    },
+    {
+      name: "3dan",
+      player1: "Alice",
+      player2: "Bob",
+      result: "Draw",
+      Move: [
+        { xCoordinate: 1, yCoordinate: 2, color: "White" },
+        { xCoordinate: 3, yCoordinate: 4, color: "Black" },
+        // Add more moves as needed
+      ],
+    },
+    {
+      name: "5dan",
+      player1: "Alice",
+      player2: "Bob",
+      result: "Draw",
+      Move: [
+        { xCoordinate: 1, yCoordinate: 2, color: "White" },
+        { xCoordinate: 3, yCoordinate: 4, color: "Black" },
+        // Add more moves as needed
+      ],
+    },
+    {
+      name: "7dan",
+      player1: "Alice",
+      player2: "Bob",
+      result: "Draw",
+      Move: [
+        { xCoordinate: 1, yCoordinate: 2, color: "White" },
+        { xCoordinate: 3, yCoordinate: 4, color: "Black" },
+        // Add more moves as needed
+      ],
+    },
+    {
+      name: "9dan",
+      player1: "Alice",
+      player2: "Bob",
+      result: "Draw",
+      Move: [
+        { xCoordinate: 1, yCoordinate: 2, color: "White" },
+        { xCoordinate: 3, yCoordinate: 4, color: "Black" },
+        // Add more moves as needed
+      ],
+    },
+  ];
+  for (const data of gameData) {
+    const game = await prisma.game.upsert({
+      where: { name: data.name },
+      update: {},
+      create: {
+        name: data.name,
+        player1: data.player1,
+        player2: data.player2,
+        result: data.result,
+        Move: {
+          create: data.Move,
+        },
+      },
+      include: {
+        Move: true,
+      },
+    });
+
+    console.log("Game seeded:", game);
+  }
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect();
