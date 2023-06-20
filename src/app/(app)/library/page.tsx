@@ -1,4 +1,5 @@
 import Grid from "@/components/ag-grid/grid";
+import Form from "@/components/form/form";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -9,10 +10,8 @@ export default async function Library() {
       <div>
         <Grid games={data} />
       </div>
-      <div>
-        <button className="bg-slate-300 px-4 py-2 mt-4 rounded-sm">
-          Add Kifu
-        </button>
+      <div className="outline  mt-4 p-6">
+        <Form />
       </div>
     </div>
   );
