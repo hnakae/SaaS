@@ -6,7 +6,8 @@ const prisma = new PrismaClient();
 export default async function Library() {
   const data = await prisma.game.findMany();
   return (
-    <div className="min-h-screen flex flex-col py-6 px-12">
+    <div className="min-h-screen flex flex-col py-6 px-12 space-y-4">
+      <div className="text-center text-4xl font-bold">My Kifu</div>
       <div>
         <Grid games={data} />
       </div>

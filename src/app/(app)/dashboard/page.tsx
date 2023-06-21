@@ -22,7 +22,7 @@ export default async function Dashboard() {
   return (
     <div className="  min-h-screen space-y-6">
       {/* <Image src={profile} alt="image" width="500" height="500" /> */}
-
+      <div className="text-center font-bold text-4xl py-6">Dashboard</div>
       <div className=" flex flex-col justify-center items-center pt-6 space-y-4">
         {/* <Card data={session?.user?.email} /> */}
         {/* <Image src="/hikaru.jpg" alt="" width={850} height={100} priority /> */}
@@ -36,7 +36,7 @@ export default async function Dashboard() {
         </div>
       </div>
       <div className="text-center font-bold text-4xl py-6">My Courses</div>
-      {courses?.map((course: CourseProps) => (
+      {courses?.slice(0, 2).map((course: CourseProps) => (
         <Course
           key={course.id}
           title={course.title}
