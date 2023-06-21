@@ -145,7 +145,7 @@ export const GoGame = () => {
     <div className="game">
       <h1 className="text-center mb-6"> Go Game</h1>
 
-      {/* preload */}
+      {/* preload images lol*/}
       <Image
         src="/black.webp"
         width={20}
@@ -164,37 +164,59 @@ export const GoGame = () => {
       />
 
       {/* container */}
-      <div className="flex justify-center items-center relative w-[380px] h-[380px] ">
-        {/* Board */}
-        <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-0 ">
-          <SvgBoard />
-        </div>
+      <div className="flex">
+        <div>
+          {/* board */}
+          <div className="flex justify-center items-center relative w-[380px] h-[380px] ">
+            {/* Board */}
+            <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-0 ">
+              <SvgBoard />
+            </div>
 
-        {/* Stones */}
-        <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 ">
-          <Board board={board} handleClick={handleOnClick} />
+            {/* Stones */}
+            <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 ">
+              <Board board={board} handleClick={handleOnClick} />
+            </div>
+          </div>
+          {/* buttons */}
+          <div className="flex justify-around items-center outline mt-4  p-4">
+            <button
+              className="hover:underline"
+              type="button"
+              onClick={() => restartGame()}
+            >
+              Clear Board
+            </button>
+            <button className="undo" type="button" onClick={undoMove}>
+              <Image
+                src="/right-arrow.png"
+                alt="img"
+                width={20}
+                height={20}
+                className="transform rotate-180"
+              />
+            </button>
+            <button className="redo" type="button" onClick={redoMove}>
+              <Image src="/right-arrow.png" alt="img" width={20} height={20} />
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-around items-center outline mt-4  p-4">
-        <button
-          className="hover:underline"
-          type="button"
-          onClick={() => restartGame()}
-        >
-          Clear Board
-        </button>
-        <button className="undo" type="button" onClick={undoMove}>
-          <Image
-            src="/right-arrow.png"
-            alt="img"
-            width={20}
-            height={20}
-            className="transform rotate-180"
-          />
-        </button>
-        <button className="redo" type="button" onClick={redoMove}>
-          <Image src="/right-arrow.png" alt="img" width={20} height={20} />
-        </button>
+        <div className=" ml-6 outline w-[380px] p-4 ">
+          <div className="text-center mb-4">Game Information</div>
+          <div className=" ">
+            <div>Name: Hiro vs Daniel</div>
+            <div>Black: Daniel</div>
+            <div>White: Hiro</div>
+            <div>Moves: 186</div>
+            <div>Rules: AGA</div>
+            <div>Komi: 6.5</div>
+            <div>Handicaps: 2</div>
+            <div>Time: May 5, 2023 5:00 PM</div>
+            <div>Setting: 5th Street Market Ave. Club Game</div>
+            <div>Result: ?</div>
+            <div>Comments: hahahahaha</div>
+          </div>
+        </div>
       </div>
     </div>
   );
