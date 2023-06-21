@@ -143,7 +143,7 @@ export const GoGame = () => {
 
   return (
     <div className="game">
-      <h1 className="text-center mb-6"> Go Game</h1>
+      <h1 className="text-center mb-6"> </h1>
 
       {/* preload images lol*/}
       <Image
@@ -165,6 +165,64 @@ export const GoGame = () => {
 
       {/* container */}
       <div className="flex">
+        <div className="mr-6 outline p-4 w-[350px]">
+          <div className="text-center mb-4">Analytics</div>
+          <div className="flex justify-around">
+            <div className="flex flex-col ">
+              <div>Stats</div>
+              <div>Number of Groups...........</div>
+              <div>Total Liberty Count..........</div>
+              <div>Stones on Goban...........</div>
+              <div>Tenuki Quadrant...........</div>
+              <div>1st line moves...........</div>
+              <div>2nd line moves...........</div>
+              <div>3rd line moves...........</div>
+              <div>4th line moves...........</div>
+              <div>5th line moves...........</div>
+              <div>6th line moves...........</div>
+              <div>7th line moves...........</div>
+              <div>8th line moves...........</div>
+              <div>9th line moves...........</div>
+              <div>Tengen...........</div>
+            </div>
+            <div className="flex justify-end  space-x-4">
+              <div className="">
+                <div>Black</div>
+                <div>3</div>
+                <div>100</div>
+                <div>92</div>
+                <div>1</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>Carlos</div>
+              </div>
+              <div>
+                <div>White</div>
+                <div>4</div>
+                <div>85</div>
+                <div>94</div>
+                <div>2</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>lol</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div>
           {/* board */}
           <div className="flex justify-center items-center relative w-[380px] h-[380px] ">
