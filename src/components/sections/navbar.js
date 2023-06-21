@@ -30,9 +30,9 @@ const Navbar = () => {
             <Link href="/courses">Courses</Link>
             <Link href="/library">Library</Link>
             <Link href="/board">Board</Link>
-            <Link href="/getplus" className=" rounded-sm p-2">
+            {/* <Link href="/getplus" className=" rounded-sm p-2">
               Premium
-            </Link>
+            </Link> */}
           </div>
           {/* <Switch
             className="z-30"
