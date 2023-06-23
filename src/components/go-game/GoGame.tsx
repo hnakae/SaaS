@@ -20,6 +20,20 @@ export const GoGame = () => {
   const [redoMoveHistory, setRedoMoveHistory] = useState<
     Array<[number, number, string]>
   >([]);
+  const [blackMoves, setBlackMoves] = useState<number>(0);
+  const [whiteMoves, setWhiteMoves] = useState<number>(0);
+  const [blackLineCounts, setBlackLineCounts] = useState<number[]>(
+    Array.from({ length: boardSize }, () => 0)
+  );
+  const [whiteLineCounts, setWhiteLineCounts] = useState<number[]>(
+    Array.from({ length: boardSize }, () => 0)
+  );
+
+  // ...
+
+  // setMoveHistory([...moveHistory, [nextMoveRow, nextMoveCol, player]]);
+  // const lastMove = moveHistory[moveHistory.length - 1];
+  // const [lastMoveRow, lastMoveCol, lastMoveColor] = lastMove;
 
   const getAdjacentSides = (row: number, col: number): number => {
     let count = 0;
@@ -68,12 +82,30 @@ export const GoGame = () => {
         }
       })
     );
+    const line =
+      Math.min(row, col, boardSize - row - 1, boardSize - col - 1) + 1;
+
     const nextPlayer = player === "/black.webp" ? "/white.webp" : "/black.webp";
 
     setBoard(updatedPlayerBoard);
     setMoveHistory([...moveHistory, [row, col, player]]);
     setRedoMoveHistory([]); // Clear redo move history
     setPlayer(nextPlayer);
+    if (player === "/black.webp") {
+      setBlackMoves(blackMoves + 1);
+      setBlackLineCounts((prevCounts) => {
+        const updatedCounts = [...prevCounts];
+        updatedCounts[line - 1]++;
+        return updatedCounts;
+      });
+    } else {
+      setWhiteMoves(whiteMoves + 1);
+      setWhiteLineCounts((prevCounts) => {
+        const updatedCounts = [...prevCounts];
+        updatedCounts[line - 1]++;
+        return updatedCounts;
+      });
+    }
   };
 
   const undoMove = () => {
@@ -170,10 +202,10 @@ export const GoGame = () => {
           <div className="flex justify-around">
             <div className="flex flex-col ">
               <div>Stats</div>
-              <div>Number of Groups...........</div>
-              <div>Total Liberty Count..........</div>
               <div>Stones on Goban...........</div>
-              <div>Tenuki Quadrant...........</div>
+              {/* <div>Number of Groups...........</div>
+              <div>Total Liberty Count..........</div>
+              <div>Tenuki Quadrant...........</div> */}
               <div>1st line moves...........</div>
               <div>2nd line moves...........</div>
               <div>3rd line moves...........</div>
@@ -188,37 +220,38 @@ export const GoGame = () => {
             <div className="flex justify-end  space-x-4">
               <div className="">
                 <div>Black</div>
-                <div>3</div>
-                <div>100</div>
+                <div>{blackMoves}</div>
+                {/* <div>100</div>
                 <div>92</div>
-                <div>1</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
+                <div>1</div> */}
+                <div>{blackLineCounts[0]}</div>
+                <div>{blackLineCounts[1]}</div>
+                <div>{blackLineCounts[2]}</div>
+                <div>{blackLineCounts[3]}</div>
+                <div>{blackLineCounts[4]}</div>
+                <div>{blackLineCounts[5]}</div>
+                <div>{blackLineCounts[6]}</div>
+                <div>{blackLineCounts[7]}</div>
+                <div>{blackLineCounts[8]}</div>
+                <div>{blackLineCounts[9]}</div>
                 <div>Carlos</div>
               </div>
               <div>
                 <div>White</div>
-                <div>4</div>
-                <div>85</div>
+                <div>{whiteMoves}</div>
+                {/* <div>85</div>
                 <div>94</div>
-                <div>2</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>10</div>
-                <div>lol</div>
+                <div>2</div> */}
+                <div>{whiteLineCounts[0]}</div>
+                <div>{whiteLineCounts[1]}</div>
+                <div>{whiteLineCounts[2]}</div>
+                <div>{whiteLineCounts[3]}</div>
+                <div>{whiteLineCounts[4]}</div>
+                <div>{whiteLineCounts[5]}</div>
+                <div>{whiteLineCounts[6]}</div>
+                <div>{whiteLineCounts[7]}</div>
+                <div>{whiteLineCounts[8]}</div>
+                <div>{whiteLineCounts[9]}</div>
               </div>
             </div>
           </div>
