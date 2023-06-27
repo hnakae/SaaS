@@ -4,6 +4,8 @@ import { Board } from "./board";
 import { SvgBoard } from "../../../public/svg/SvgBoard";
 import "./GoGame.sass";
 import Image from "next/image";
+import { it } from "node:test";
+import { X } from "lucide-react";
 
 type BoardArray = Array<Array<JSX.Element | null>>;
 
@@ -13,6 +15,7 @@ export const GoGame = () => {
     Array.from({ length: boardSize }, () => null)
   );
   const [board, setBoard] = useState<BoardArray>(initialBoard);
+
   const [player, setPlayer] = useState<string>("/black.webp");
   const [moveHistory, setMoveHistory] = useState<
     Array<[number, number, string]>
@@ -28,12 +31,18 @@ export const GoGame = () => {
   const [whiteLineCounts, setWhiteLineCounts] = useState<number[]>(
     Array.from({ length: boardSize }, () => 0)
   );
+  type Coordinate = {
+    x: number;
+    y: number;
+  };
 
-  // ...
+  type Color = "black" | "white";
+  type Visited = true | false;
+  // const coordinates: [Coordinate, Color][] = [];
 
-  // setMoveHistory([...moveHistory, [nextMoveRow, nextMoveCol, player]]);
-  // const lastMove = moveHistory[moveHistory.length - 1];
-  // const [lastMoveRow, lastMoveCol, lastMoveColor] = lastMove;
+  // const [visitedStones, setVisitedStones] = useState<Map<string, boolean>>(
+  //   new Map()
+  // );
 
   const getAdjacentSides = (row: number, col: number): number => {
     let count = 0;
@@ -55,15 +64,92 @@ export const GoGame = () => {
     return count;
   };
 
+  const coordinates: [Coordinate, Color, Visited][] = [];
+
+  const getColorForCoordinate = (coordinate: Coordinate): Color | undefined => {
+    const pair = coordinates.find(
+      ([coord]) => coord.x === coordinate.x && coord.y === coordinate.y
+    );
+    return pair ? pair[1] : undefined;
+  };
+
+  const isVisited = () => {
+    return true;
+  };
+
+  const setVisited = () => {};
+
+  const count = (coordinate: Coordinate, color: Color) => {
+    // if coordinate is not off the edge
+    // THEN
+    // IF there is a stone at coordinate AND it is teh given color AND it is not marked THEN
+    let piece = board[coordinate.x][coordinate.y];
+    let pieceColor = getColorForCoordinate(coordinate);
+    let visited = isVisited();
+    if (piece && pieceColor == color && !visited) {
+      setVisited();
+      count(coordinate, pieceColor);
+      count(coordinate, pieceColor);
+      count(coordinate, pieceColor);
+      count(coordinate, pieceColor);
+    } else if (piece == null) {
+    }
+    //   mark it
+    //   CALL COUNT (North, color)
+    //   CALL COUNT (EAST, color)
+    //   CALL COUNT (SOUTH, color)
+    //   CALL COUNT (WEST, color)
+    // ELSE IF there iis no stone at X
+    // THEN
+    //   mark the point as a liberty
+    //   increment the liberty count
+    // END
+    // END
+  };
+
+  /*
+  const getGroupForCoordinate = () => {
+    return group tag ( B1 W1 )
+  }
+
+  group(row, col){
+    group.add(cur)
+    check above, below, left, right of (row, col)
+    if getColorForCoordinate(adjacent) = getColorForCoordinate(row, col)
+      group.add(adjacent)
+    
+  }
+*/
+
+  /*
+  const captures(color){
+
+  }
+  */
+
   const handleOnClick = (row: number, col: number) => {
+    //if not null, exit.
     if (board[row][col]) {
       return;
     }
 
+    let currentColor: Color = player == "/black.webp" ? "black" : "white";
+    const coordinate: Coordinate = { x: row, y: col };
+    coordinates.push([coordinate, currentColor, false]);
+    let color = getColorForCoordinate({ x: row, y: col });
+    console.log(color);
+    // const coordinate: Coordinate = { row, col };
+    // const color = getColorOfMove(row, col);
+
+    // console.log(initialColor);
     const updatedPlayerBoard = board.map((newRow, rowIndex) =>
       newRow.map((cell, cellIndex) => {
         if (rowIndex === row && cellIndex === col) {
-          const adjacentSides = getAdjacentSides(row, col);
+          // const adjacentSides = getAdjacentSides(row, col);
+          const color = player == "/black.webp" ? "black" : "white";
+          // console.log(currentColor);
+          let piece = { x: row, y: col };
+          count(piece, currentColor);
           return (
             <div
               key={cellIndex}
@@ -72,7 +158,7 @@ export const GoGame = () => {
               <div className="stone-content relative ">
                 <Image src={player} width={20} height={20} alt="img" priority />
                 <div className="adjacent-sides absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-blue-600">
-                  {adjacentSides}
+                  {/* {adjacentSides} */}
                 </div>
               </div>
             </div>
@@ -90,6 +176,18 @@ export const GoGame = () => {
     setBoard(updatedPlayerBoard);
     setMoveHistory([...moveHistory, [row, col, player]]);
     setRedoMoveHistory([]); // Clear redo move history
+
+    // const initialColor = getColorOfMove(row, col); // Get color of the initial stone
+    // const group: Array<[number, number]> = [[row, col]]; // Initialize group with the initial stone
+    // dfs(row, col, group); // Start DFS to group stones
+    // console.log("Grouped stones:", group); // group will be an array of coordinates
+
+    //make an array of groups
+    //a group is an array of coordinates
+    // on click, put the move in a new group. with recursive dfs, add adjacent moves that are the same color into the group and mark as visited before recursing again(mark visited only if necessary).
+    //after adding moves to the group array, add the group to the groups array.
+    //console.log the group array
+
     setPlayer(nextPlayer);
     if (player === "/black.webp") {
       setBlackMoves(blackMoves + 1);
@@ -126,6 +224,35 @@ export const GoGame = () => {
     setMoveHistory(moveHistory.slice(0, -1));
     setRedoMoveHistory(updatedRedoMoveHistory);
     setPlayer(lastMoveColor);
+    if (lastMoveColor === "/black.webp") {
+      setBlackMoves(blackMoves - 1);
+      setBlackLineCounts((prevCounts) => {
+        const updatedCounts = [...prevCounts];
+        const line =
+          Math.min(
+            lastMoveRow,
+            lastMoveCol,
+            boardSize - lastMoveRow - 1,
+            boardSize - lastMoveCol - 1
+          ) + 1;
+        updatedCounts[line - 1]--;
+        return updatedCounts;
+      });
+    } else {
+      setWhiteMoves(whiteMoves - 1);
+      setWhiteLineCounts((prevCounts) => {
+        const updatedCounts = [...prevCounts];
+        const line =
+          Math.min(
+            lastMoveRow,
+            lastMoveCol,
+            boardSize - lastMoveRow - 1,
+            boardSize - lastMoveCol - 1
+          ) + 1;
+        updatedCounts[line - 1]--;
+        return updatedCounts;
+      });
+    }
   };
 
   const redoMove = () => {
@@ -150,7 +277,7 @@ export const GoGame = () => {
               <div className="stone-content relative ">
                 <Image src={player} width={20} height={20} alt="img" priority />
                 <div className="adjacent-sides absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-blue-600">
-                  {adjacentSides}
+                  {/* {adjacentSides} */}
                 </div>
               </div>
             </div>
@@ -160,10 +287,37 @@ export const GoGame = () => {
         }
       })
     );
+    const line = Math.min(
+      nextMoveRow,
+      nextMoveCol,
+      boardSize - nextMoveRow - 1,
+      boardSize - nextMoveCol - 1
+    );
     setBoard(updatedBoard);
     setMoveHistory([...moveHistory, [nextMoveRow, nextMoveCol, player]]);
     setRedoMoveHistory(redoMoveHistory.slice(0, -1));
     setPlayer(nextMoveColor);
+    if (player === "/black.webp") {
+      setBlackMoves(blackMoves + 1);
+      const updatedBlackLineCounts = [
+        ...blackLineCounts.slice(0, line),
+        blackLineCounts[line] + 1,
+      ];
+      for (let i = line + 1; i < blackLineCounts.length; i++) {
+        updatedBlackLineCounts.push(blackLineCounts[i]);
+      }
+      setBlackLineCounts(updatedBlackLineCounts);
+    } else {
+      setWhiteMoves(whiteMoves + 1);
+      const updatedWhiteLineCounts = [
+        ...whiteLineCounts.slice(0, line),
+        whiteLineCounts[line] + 1,
+      ];
+      for (let i = line + 1; i < whiteLineCounts.length; i++) {
+        updatedWhiteLineCounts.push(whiteLineCounts[i]);
+      }
+      setWhiteLineCounts(updatedWhiteLineCounts);
+    }
   };
 
   const restartGame = () => {
@@ -171,6 +325,10 @@ export const GoGame = () => {
     setPlayer("/black.webp");
     setMoveHistory([]);
     setRedoMoveHistory([]);
+    setBlackMoves(0);
+    setWhiteMoves(0);
+    setBlackLineCounts(new Array(boardSize).fill(0));
+    setWhiteLineCounts(new Array(boardSize).fill(0));
   };
 
   return (
@@ -234,7 +392,6 @@ export const GoGame = () => {
                 <div>{blackLineCounts[7]}</div>
                 <div>{blackLineCounts[8]}</div>
                 <div>{blackLineCounts[9]}</div>
-                <div>Carlos</div>
               </div>
               <div>
                 <div>White</div>
