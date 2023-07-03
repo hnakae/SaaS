@@ -1,126 +1,148 @@
-"use client"; // Use client
-
+"use client";
 import React, { useState } from "react";
-import { Board } from "./board";
+import Board from "./board";
 import { SvgBoard } from "../../../public/svg/SvgBoard";
 import "./GoGame.sass";
 import Image from "next/image";
 
-type Coordinate = {
+export type Coordinate = {
   x: number;
   y: number;
 };
 
-type Color = "black" | "white";
+export type Color = "black" | "white";
 
-type Stone = {
-  coordinate: Coordinate;
-  color: Color;
-  group: StoneGroup | null;
-};
+export class Stone {
+  constructor(
+    public coordinate: Coordinate,
+    public color: Color,
+    public group: StoneGroup | null
+  ) {}
+}
 
-type StoneGroup = {
-  stones: Stone[];
-  libertyCount: number;
-};
+export class StoneGroup {
+  constructor(public stones: Stone[], public libertyCount: number) {}
+}
 
 type BoardArray = Array<Array<Stone | null>>;
 
-export const GoGame = () => {
-  const boardSize = 19;
-  const initialBoard = Array.from({ length: boardSize }, () =>
-    Array.from({ length: boardSize }, () => null)
-  );
-  const [board, setBoard] = useState<BoardArray>(initialBoard);
-  const [groups, setGroups] = useState<StoneGroup[]>([]);
-  const [player, setPlayer] = useState<string>("/black.webp");
+class GoGame extends React.Component<
+  {},
+  {
+    board: BoardArray;
+    groups: StoneGroup[];
+    player: string;
+  }
+> {
+  boardSize: number;
+  initialBoard: BoardArray;
 
-  const placeStone = (row: number, col: number) => {
-    if (board[row][col]) {
+  constructor(props: {}) {
+    super(props);
+
+    this.boardSize = 19;
+    this.initialBoard = Array.from({ length: this.boardSize }, () =>
+      Array.from({ length: this.boardSize }, () => null)
+    );
+
+    this.state = {
+      board: this.initialBoard,
+      groups: [],
+      player: "/black.webp",
+    };
+  }
+
+  placeStone(row: number, col: number) {
+    if (this.state.board[row][col]) {
       return;
     }
-    const color: Color = player === "/black.webp" ? "black" : "white";
 
-    const stone: Stone = {
-      coordinate: { x: col + 1, y: row + 1 },
-      color,
-      group: null,
-    };
+    const color: Color =
+      this.state.player === "/black.webp" ? "black" : "white";
+    const stone: Stone = new Stone({ x: col + 1, y: row + 1 }, color, null);
 
-    const newGroup: StoneGroup = {
-      stones: [stone],
-      libertyCount: 4,
-    };
+    const newGroup: StoneGroup = new StoneGroup([stone], 4);
     stone.group = newGroup;
-    setGroups([...groups, newGroup]);
 
-    const updatedPlayerBoard: BoardArray = board.map((newRow, rowIndex) =>
-      newRow.map((cell, cellIndex) => {
-        if (rowIndex === row && cellIndex === col) {
-          return stone;
-        } else {
-          return cell;
-        }
-      })
-    );
-    const nextPlayer = player === "/black.webp" ? "/white.webp" : "/black.webp";
-    setPlayer(nextPlayer);
-    setBoard(updatedPlayerBoard);
+    this.setState((prevState) => ({
+      groups: [...prevState.groups, newGroup],
+      player:
+        prevState.player === "/black.webp" ? "/white.webp" : "/black.webp",
+      board: prevState.board.map((newRow, rowIndex) =>
+        newRow.map((cell, cellIndex) => {
+          if (rowIndex === row && cellIndex === col) {
+            return stone;
+          } else {
+            return cell;
+          }
+        })
+      ),
+    }));
 
     console.log("Stone placed:", stone);
     console.log("New group created:", newGroup);
-    console.log("Updated board:", updatedPlayerBoard);
-    console.log("Next player:", nextPlayer);
-  };
+    console.log("Updated board:", this.state.board);
+    console.log("Next player:", this.state.player);
+  }
 
-  const restartGame = () => {
-    setBoard(initialBoard);
-    setPlayer("/black.webp");
+  restartGame() {
+    this.setState({
+      board: this.initialBoard,
+      player: "/black.webp",
+      groups: [],
+    });
 
     console.log("Game restarted");
-  };
+  }
 
-  return (
-    <div className="game">
-      <Image
-        src="/black.webp"
-        width={20}
-        height={20}
-        alt="img"
-        priority
-        className="hidden"
-      />
-      <Image
-        src="/white.webp"
-        width={20}
-        height={20}
-        alt="img"
-        priority
-        className="hidden"
-      />
+  render() {
+    return (
+      <div className="game">
+        <Image
+          src="/black.webp"
+          width={20}
+          height={20}
+          alt="img"
+          priority
+          className="hidden"
+        />
+        <Image
+          src="/white.webp"
+          width={20}
+          height={20}
+          alt="img"
+          priority
+          className="hidden"
+        />
 
-      <div className="flex">
-        <div>
-          <div className="flex justify-center items-center relative w-[380px] h-[380px] ">
-            <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-0 ">
-              <SvgBoard />
+        <div className="flex">
+          <div>
+            <div className="flex justify-center items-center relative w-[380px] h-[380px] ">
+              <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-0 ">
+                <SvgBoard />
+              </div>
+
+              <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 ">
+                <Board
+                  board={this.state.board}
+                  handleClick={this.placeStone.bind(this)}
+                />
+              </div>
             </div>
-
-            <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 ">
-              <Board board={board} handleClick={placeStone} />
+            <div className="flex justify-around items-center outline mt-4  p-4">
+              <button
+                className="hover:underline"
+                type="button"
+                onClick={this.restartGame.bind(this)}
+              >
+                Clear Board
+              </button>
             </div>
-          </div>
-          <div className="flex justify-around items-center outline mt-4  p-4">
-            <button
-              className="hover:underline"
-              type="button"
-              onClick={() => restartGame()}
-            >
-              Clear Board
-            </button>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
+
+export default GoGame;
