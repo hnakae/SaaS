@@ -2,24 +2,26 @@
 import Image from "next/image";
 import React from "react";
 
-export type Coordinate = {
-  x: number;
-  y: number;
-};
+import { Coordinate, Color, Stone, StoneGroup } from "./GoGame";
 
-export type Color = "black" | "white";
+// export type Coordinate = {
+//   x: number;
+//   y: number;
+// };
 
-export class Stone {
-  constructor(
-    public coordinate: Coordinate,
-    public color: Color,
-    public group: StoneGroup | null
-  ) {}
-}
+// export type Color = "black" | "white";
 
-export class StoneGroup {
-  constructor(public stones: Stone[], public libertyCount: number) {}
-}
+// export class Stone {
+//   constructor(
+//     public coordinate: Coordinate,
+//     public color: Color,
+//     public group: StoneGroup | null
+//   ) {}
+// }
+
+// export class StoneGroup {
+//   constructor(public stones: Stone[], public libertyCount: number) {}
+// }
 
 type BoardProps = {
   board: (Stone | null)[][];
@@ -56,7 +58,7 @@ class Board extends React.Component<BoardProps> {
                         alt="img"
                       />
                       <div className="adjacent-sides absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-blue-600">
-                        {stone.group?.libertyCount}
+                        {stone.group?.liberties}
                       </div>
                     </div>
                   </div>
