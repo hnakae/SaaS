@@ -2,7 +2,8 @@
 import Image from "next/image";
 import React from "react";
 
-import { Coordinate, Color, Stone, StoneGroup } from "./GoGame";
+// import { Coordinate, Color, UIStone, Stone, StoneGroup } from "./GoGame";
+import { Color, UIStone } from "./GoGame";
 
 // export type Coordinate = {
 //   x: number;
@@ -24,13 +25,14 @@ import { Coordinate, Color, Stone, StoneGroup } from "./GoGame";
 // }
 
 type BoardProps = {
-  board: (Stone | null)[][];
+  board: (UIStone | null)[][];
   handleClick: (row: number, col: number) => void;
+  handleDoubleClick: (row: number, col: number) => void;
 };
 
 class Board extends React.Component<BoardProps> {
   render() {
-    const { board, handleClick } = this.props;
+    const { board, handleClick, handleDoubleClick } = this.props;
 
     return (
       <div className="board">
@@ -41,6 +43,7 @@ class Board extends React.Component<BoardProps> {
                 key={`${rowIndex}-${colIndex}`}
                 className="cell"
                 onClick={() => handleClick(rowIndex, colIndex)}
+                onDoubleClick={() => handleDoubleClick(rowIndex, colIndex)}
               >
                 {stone ? (
                   <div
@@ -49,8 +52,12 @@ class Board extends React.Component<BoardProps> {
                     <div className="stone-content relative ">
                       <Image
                         src={
-                          stone.color === "black"
-                            ? "/black.webp"
+                          stone.color === Color.black
+                            ? stone.isLast
+                              ? "/black_latest.png"
+                              : "/black.webp"
+                            : stone.isLast
+                            ? "/white_latest.png"
                             : "/white.webp"
                         }
                         width={20}
@@ -58,8 +65,11 @@ class Board extends React.Component<BoardProps> {
                         alt="img"
                       />
                       <div className="adjacent-sides absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-blue-600">
-                        {stone.group?.liberties}
+                        {stone.libertyCount}
                       </div>
+                      {/* <div className="adjacent-sides absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-blue-600">
+                        {stone.group?.name}
+                      </div> */}
                     </div>
                   </div>
                 ) : null}

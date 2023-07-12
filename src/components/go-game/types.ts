@@ -2,16 +2,20 @@ export class Coordinate {
   constructor(public x: number, public y: number) {}
 }
 
-export type Color = "black" | "white";
+export enum Color {
+  black,
+  white,
+}
 
+export class GoGame {}
 export class StoneGroup {
-  constructor(public stones: Stone[], public libertyCount: number) {}
+  constructor(stone: Stone, go_game: GoGame) {}
 }
 
 export class Stone {
   constructor(
-    public coordinate: Coordinate,
     public color: Color,
+    public coordinate: Coordinate,
     public group: StoneGroup | null
   ) {}
 }
