@@ -4,6 +4,7 @@ import React, { useState, ChangeEvent } from "react";
 import { SvgBoard } from "../../../public/svg/SvgBoard";
 import "./GoGame.sass";
 import Image from "next/image";
+import { CSSProperties } from "react";
 
 import UIBoard from "./UIBoard";
 import { Color, Stone } from "./StoneGroup";
@@ -213,13 +214,13 @@ export class GoGame extends React.Component<
   }
 
   render() {
-    const BoardStyle = {
+    const BoardStyle: CSSProperties = {
       marginTop: "10px",
     };
-    const ControlPanelStyle = {
+    const ControlPanelStyle: CSSProperties = {
       marginBottom: "10px",
     };
-    const inputStyle = {
+    const inputStyle: CSSProperties = {
       padding: "8px",
       fontSize: "16px",
       border: "1px solid #ccc",
@@ -227,7 +228,7 @@ export class GoGame extends React.Component<
       marginBottom: "8px",
       width: "380px",
     };
-    const buttonStyle = {
+    const buttonStyle: CSSProperties = {
       padding: "8px",
       fontSize: "16px",
       border: "1px solid #ccc",
@@ -236,17 +237,17 @@ export class GoGame extends React.Component<
       marginLeft: "20px",
       width: "100px",
     };
-    const numberInputStyle = {
+    const numberInputStyle: CSSProperties = {
       border: "1px solid #ccc",
       textAlign: "center",
       width: "40px",
     };
-    const symbolInputStyle = {
+    const symbolInputStyle: CSSProperties = {
       border: "1px solid #ccc",
       textAlign: "center",
       width: "40px",
     };
-    const labelStyle = {
+    const labelStyle: CSSProperties = {
       marginRight: "20px",
       width: "120px",
     };
@@ -311,14 +312,14 @@ export class GoGame extends React.Component<
               <span>{this.state.captured_black_stones}</span>
 
               <span>
-                <img
+                <Image
                   hidden={this.state.player == "/black.webp"}
                   width={20}
                   height={20}
                   src="/white.webp"
                   alt=""
                 />
-                <img
+                <Image
                   hidden={this.state.player != "/black.webp"}
                   width={20}
                   height={20}
