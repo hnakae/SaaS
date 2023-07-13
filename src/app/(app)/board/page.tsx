@@ -1,4 +1,4 @@
-import GoGame from "@/components/go-game/GoGame";
+import GoGame from "@/components/go-game-split/GoGame";
 export default function Board() {
   return (
     <>
